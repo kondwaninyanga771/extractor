@@ -1,12 +1,6 @@
-FROM node:18-bullseye-slim
+FROM node:20-alpine
 
-RUN sed -i -e 's/main$/main contrib non-free/g' /etc/apt/sources.list && \
-    echo "deb http://deb.debian.org/debian bullseye non-free" >> /etc/apt/sources.list && \
-    apt-get update && apt-get install -y \
-    p7zip-full \
-    unrar \
-    curl \
-    && rm -rf /var/lib/apt/lists/*
+RUN apk update && apk add --no-cache p7zip unrar curl
 
 WORKDIR /app
 
